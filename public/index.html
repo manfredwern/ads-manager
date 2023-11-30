@@ -1,121 +1,134 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Ads Manager</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/global.css" />
     <style>
-        .container {
-            position: relative;
-            max-width: 640px;
-            margin: 10px auto;
-        }
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-        }
-        #video-element {
-            /* forces the contents to fill the container */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        #ad-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+      .container {
+        position: relative;
+        max-width: 640px;
+        margin: 10px auto;
+      }
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+      }
+      #video-element {
+        /* forces the contents to fill the container */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      #ad-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
     </style>
-</head>
-<body>
-<h1>Ads Manager</h1>
-<p>...</p>
+  </head>
+  <body>
+    <h1>Ads Manager</h1>
+    <p>...</p>
 
-<div class="container">
-    <div class="video-container">
-        <video id="video-element" webkit-playsinline="true" playsinline="true" style="background-color: rgb(0, 0, 0)" src="https://storage.googleapis.com/interactive-media-ads/media/android.mp4">
-            <!--<source src="https://storage.googleapis.com/interactive-media-ads/media/android.mp4"></source>
+    <div class="container">
+      <div class="video-container">
+        <video
+          id="video-element"
+          webkit-playsinline="true"
+          playsinline="true"
+          style="background-color: rgb(0, 0, 0)"
+          src="https://storage.googleapis.com/interactive-media-ads/media/android.mp4"
+        >
+          <!--<source src="https://storage.googleapis.com/interactive-media-ads/media/android.mp4"></source>
             <source src="https://storage.googleapis.com/interactive-media-ads/media/android.webm"></source>-->
         </video>
         <div id="ad-container"></div>
+      </div>
     </div>
-</div>
 
-<button id="play-content-button" class="primary-button">Play Content</button>
-<br/>
-<br/>
-<h3>VAST Tag URL/XML Inspector (VAST, VPAID):</h3>
-<textarea id="vast-url-input">https://eyevinn.adtest.eyevinn.technology/api/v1/vast?dur=30</textarea>
-<!-- https://v.adserve.tv/pg/vast-vpaid.xml -->
-<!-- https://vid.springserve.com/vast/184920?w=640&h=360 -->
-<button id="test-ad-button" class="primary-button">Test Ad</button>
-<button id="pause-ad-button" class="ad-button">Pause Ad</button>
-<!--<button id="resume-ad-button" class="ad-button">Resume Ad</button>-->
-<button id="stop-ad-button" class="ad-button">Stop Ad</button>
-<button id="skip-ad-button" class="ad-button">Skip Ad</button>
-<button id="resize-ad-button" class="ad-button">Resize Ad</button>
-<button id="set-ad-volume-1-button" class="ad-button">Set Ad Volume 1</button>
-<button id="set-ad-volume-0-button" class="ad-button">Set Ad Volume 0</button>
-<h3>Ad Events:</h3>
-<ul id="events-list"></ul>
-<button id="clear-logs-button">Clear logs</button>
-<br/>
-<br/>
-<br/>
+    <button id="play-content-button" class="primary-button">
+      Play Content
+    </button>
+    <br />
+    <br />
+    <h3>VAST Tag URL/XML Inspector (VAST, VPAID):</h3>
+    <!-- <textarea id="vast-url-input">https://eyevinn.adtest.eyevinn.technology/api/v1/vast?dur=30</textarea> -->
+    <textarea id="vast-url-input">
+https://bs.serving-sys.com/Serving/adServer.bs?c=23&cn=display&pli=1077560650&gdpr=${GDPR}&gdpr_consent=${GDPR_CONSENT_68}&ord=[timestamp]</textarea
+    >
+    <!-- https://v.adserve.tv/pg/vast-vpaid.xml -->
+    <!-- https://vid.springserve.com/vast/184920?w=640&h=360 -->
+    <button id="test-ad-button" class="primary-button">Test Ad</button>
+    <button id="pause-ad-button" class="ad-button">Pause Ad</button>
+    <!--<button id="resume-ad-button" class="ad-button">Resume Ad</button>-->
+    <button id="stop-ad-button" class="ad-button">Stop Ad</button>
+    <button id="skip-ad-button" class="ad-button">Skip Ad</button>
+    <button id="resize-ad-button" class="ad-button">Resize Ad</button>
+    <button id="set-ad-volume-1-button" class="ad-button">
+      Set Ad Volume 1
+    </button>
+    <button id="set-ad-volume-0-button" class="ad-button">
+      Set Ad Volume 0
+    </button>
+    <h3>Ad Events:</h3>
+    <ul id="events-list"></ul>
+    <button id="clear-logs-button">Clear logs</button>
+    <br />
+    <br />
+    <br />
 
-<script src="js/ads-manager.js?v=23"></script>
-<script src="js/index.js?v=22"></script>
+    <script src="js/ads-manager.js?v=23"></script>
+    <script src="js/index.js?v=22"></script>
 
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-</body>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+  </body>
 </html>

@@ -3,7 +3,7 @@ import AdError from './ad-error';
 import Ad from './ad';
 
 const AdsManager = function(adContainer) {
-
+  
   if(!(adContainer && (adContainer instanceof HTMLElement
     || adContainer.getRootNode))) {
     throw new Error('ad container is not defined');
@@ -94,7 +94,9 @@ const AdsManager = function(adContainer) {
     loadVideoTimeout: 8000,
     withCredentials: false,
     wrapperLimit: 10,
-    resolveAll: true
+    resolveAll: true,
+    loop: false,
+    loopAfter: 0
   };
   // Error codes
   this.ERROR_CODES = {
@@ -180,6 +182,7 @@ const AdsManager = function(adContainer) {
   this._hasError = false;
   this._hasImpression = false;
   this._hasStarted = false;
+  this._isFirstPlay = true;
 
   this._isDestroyed = false;
 };
@@ -382,8 +385,10 @@ AdsManager.prototype.onAdImpression = function() {
       console.log('update tracker with new remainingTime', this._attributes.remainingTime);
       console.log('update tracker with new duration', this._attributes.duration);
        */
-      // Track impression
-      this._vastTracker.trackImpression();
+      if (this._isFirstPlay) {
+        // Track impression
+        this._vastTracker.trackImpression();
+      }
 
       // Start VPAID process
       this.startVPAIDProgress();
@@ -522,6 +527,8 @@ AdsManager.prototype.requestAds = function(vastUrl, options = {}) {
     wrapperLimit: this._options.wrapperLimit,
     resolveAll: this._options.resolveAll
   };
+
+  console.log('VAST OPTIONS', vastOptions);
 
   // Abort
   this.abort();
@@ -820,11 +827,21 @@ AdsManager.prototype.handleVideoSlotLoadedMetaData = function(event) {
   //}
 };
 AdsManager.prototype.handleVideoSlotEnded = function() {
-  // Complete
-  this._vastTracker && this._vastTracker.complete();
-  //setTimeout(() => {
-  this.onAdStopped();
-  //}, 75);
+  if (this._isFirstPlay) {
+    // Complete
+    this._vastTracker && this._vastTracker.complete();
+  }
+  if (this._options.loop) {
+    this._isFirstPlay = false;
+    setTimeout(() => {
+      this._videoSlot.currentTime = 0;
+      this._videoSlot.play();
+    }, this._options.loopAfter);
+  } else {
+      //setTimeout(() => {
+      this.onAdStopped();
+      //}, 75);
+  }
 };
 AdsManager.prototype._processAd = function(isNext = false) {
 
@@ -936,7 +953,7 @@ AdsManager.prototype.init = function(width, height, viewMode, isNext = false) {
 
         // VAST
         this._slot.addEventListener('click', this._handleSlotClick);
-
+        
         // Ad video slot event listeners
         this._videoSlot.addEventListener('canplay', this._handleVideoSlotCanPlay);
         this._videoSlot.addEventListener('volumechange', this._handleVideoSlotVolumeChange);
